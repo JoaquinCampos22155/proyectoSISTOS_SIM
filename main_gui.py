@@ -3,6 +3,9 @@ from tkinter import filedialog, messagebox, simpledialog
 from utils.file_loader import load_processes
 from scheduling.fifo import fifo_scheduling
 from scheduling.sjf import sjf_scheduling
+from scheduling.srt import srt_scheduling
+from scheduling.round_robin import round_robin_scheduling
+
 from gui.gantt_view import draw_gantt_chart
 
 def iniciar_simulador_con_algoritmo(nombre_algoritmo, funcion_algoritmo, requiere_quantum=False):
@@ -66,10 +69,10 @@ def mostrar_submenu_algoritmos():
               command=lambda: iniciar_simulador_con_algoritmo("SJF", sjf_scheduling)).pack(pady=5)
 
     tk.Button(root, text="⏳ Shortest Remaining Time (SRT)", font=("Arial", 12),
-              command=lambda: messagebox.showinfo("Pendiente", "SRT aún no implementado")).pack(pady=5)
+              command=lambda: iniciar_simulador_con_algoritmo("SRT", srt_scheduling)).pack(pady=5)
 
     tk.Button(root, text="🌀 Round Robin", font=("Arial", 12),
-              command=lambda: messagebox.showinfo("Pendiente", "Round Robin aún no implementado")).pack(pady=5)
+              command=lambda: iniciar_simulador_con_algoritmo("Round Robin", round_robin_scheduling, requiere_quantum=True  )).pack(pady=5)
 
     tk.Button(root, text="🔺 Priority Scheduling", font=("Arial", 12),
               command=lambda: messagebox.showinfo("Pendiente", "Priority aún no implementado")).pack(pady=5)

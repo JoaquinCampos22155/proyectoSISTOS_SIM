@@ -4,7 +4,7 @@ class Process:
         self.bt = bt  # Burst Time
         self.at = at  # Arrival Time
         self.priority = priority
-        self.remaining_time = bt  # Solo útil para SRT y RR
+        self.remaining_time = bt 
         self.start_time = None
         self.completion_time = None
         self.waiting_time = 0
