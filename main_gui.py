@@ -5,6 +5,7 @@ from scheduling.fifo import fifo_scheduling
 from scheduling.sjf import sjf_scheduling
 from scheduling.srt import srt_scheduling
 from scheduling.round_robin import round_robin_scheduling
+from scheduling.priority import priority_scheduling
 
 from gui.gantt_view import draw_gantt_chart
 
@@ -75,7 +76,7 @@ def mostrar_submenu_algoritmos():
               command=lambda: iniciar_simulador_con_algoritmo("Round Robin", round_robin_scheduling, requiere_quantum=True  )).pack(pady=5)
 
     tk.Button(root, text="🔺 Priority Scheduling", font=("Arial", 12),
-              command=lambda: messagebox.showinfo("Pendiente", "Priority aún no implementado")).pack(pady=5)
+              command=lambda: iniciar_simulador_con_algoritmo("Pendiente", priority_scheduling)).pack(pady=5)
 
     tk.Button(root, text="🔙 Volver al menú principal", font=("Arial", 10),
               command=mostrar_menu_principal).pack(pady=15)
