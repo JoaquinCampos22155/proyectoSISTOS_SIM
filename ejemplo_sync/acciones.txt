@@ -1,0 +1,3 @@
+P1, WRITE, R1, 0
+P2, WRITE, R1, 0
+P3, WRITE, R1, 1
