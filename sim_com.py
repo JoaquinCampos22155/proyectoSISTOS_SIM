@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, simpledialog
 from utils.file_loader import load_processes
 from gui.gantt_view import draw_gantt_chart
+import copy
 
 def iniciar_comparacion_algoritmos(root, nombres, funciones_dict, volver_callback):
     for widget in root.winfo_children():
@@ -131,12 +132,18 @@ def iniciar_comparacion_algoritmos(root, nombres, funciones_dict, volver_callbac
         try:
             if not procesos:
                 procesos = load_processes(archivo_procesos.get())
+            procesos_copia = copy.deepcopy(procesos)
             quantum = quantums.get(nombre) if nombre == "Round Robin" else None
-            resultado = funciones_dict[nombre](procesos, quantum) if quantum else funciones_dict[nombre](procesos)
+            resultado = funciones_dict[nombre](procesos_copia, quantum) if nombre == "Round Robin" else funciones_dict[nombre](procesos_copia)
             procesos_finales, gantt, avg_wt = resultado
             draw_gantt_chart(frame_alg, gantt, procesos_finales, avg_wt, True)
         except Exception as e:
-            tk.Label(frame_alg, text=f"❌ Error en {nombre}: {e}", fg="red").pack()
+            for w in frame_alg.winfo_children():
+                w.destroy()
+            mensaje_error = f"      ❌ Error en {nombre}:\n{e}"
+            if nombre == "Round Robin":
+                mensaje_error += "\n        Nota: normalmente en Round Robin los procesos no llegan todos al mismo tiempo(<AT>). \nIntenta cambiar el quantum también."
+            tk.Label(frame_alg, text=mensaje_error, fg="red", font=("Arial", 9), justify="left").pack(pady=10)
 
     # === Menú de control superior
     tk.Label(frame_menu, text="📊 Comparador de algoritmos", font=("Arial", 14, "bold")).pack(pady=10)
