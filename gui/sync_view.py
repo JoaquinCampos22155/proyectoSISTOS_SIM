@@ -8,11 +8,15 @@ def draw_sync_timeline(root, gantt_sync, velocidad=100):
     Eje X = ciclos, eje Y = procesos.
     """
     # Obtener procesos únicos ordenados
-    procesos_unicos = sorted(list({pid for _, pid, _, _ in gantt_sync}))
+    procesos_unicos = sorted(
+    list({pid for _, pid, _, _ in gantt_sync}),
+    key=lambda x: int(x[1:]) if x[1:].isdigit() else x
+    )
+
     proceso_fila = {pid: idx for idx, pid in enumerate(procesos_unicos)}
 
-    block_width = 40
-    block_height = 40
+    block_width = 30
+    block_height = 30
     margen_izquierdo = 100
     margen_superior = 40
 

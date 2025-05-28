@@ -1,3 +1,6 @@
+# Test para verificar que la función load_processes devuelve una lista vacía
+# cuando se proporciona un archivo de entrada vacío.
+
 from utils.file_loader import load_processes
 import pytest
 
